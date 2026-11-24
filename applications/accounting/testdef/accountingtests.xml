@@ -33,6 +33,9 @@
     <test-case case-name="auto-accounting-transaction-tests-sales">
         <jupiter-test-suite class-name="org.apache.ofbiz.accounting.accounting.AutoAcctgTransSalesTests"/>
     </test-case>
+    <test-case case-name="sales-shipment-costing-tests">
+        <jupiter-test-suite class-name="org.apache.ofbiz.accounting.accounting.SalesShipmentCostingTests"/>
+    </test-case>
     <test-case case-name="auto-accounting-transaction-tests-purchase">
         <jupiter-test-suite class-name="org.apache.ofbiz.accounting.accounting.AutoAcctgTransPurchaseTests"/>
     </test-case>
