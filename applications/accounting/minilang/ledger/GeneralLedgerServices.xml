@@ -1058,6 +1058,16 @@ under the License.
                     <set field="creditEntry.roleTypeId" from-field="billToCustomer.roleTypeId"/>
                 </if-not-empty>
                 <set field="acctgTransEntries[]" from-field="creditEntry" type="Object"/>
+
+                <!-- Create inventory item detail for change in accounting quantity when we're using average or inv cogs.
+                We always create an IID for this one InventoryItem. If the COGS method is FIFO or LIFO, the code after the else
+                 might modify accounting quantities across several IIs, quite possibly not including the one(s) we're shipping. -->
+                <set field="createDetailMap.inventoryItemId"    from="itemIssuance.inventoryItemId"/>
+                <set field="createDetailMap.orderId"    from="itemIssuance.orderId"/>
+                <set field="createDetailMap.orderItemSeqId"    from="itemIssuance.orderItemSeqId"/>
+                <set field="createDetailMap.shipGroupSeqId"    from="itemIssuance.shipGroupSeqId"/>
+                <set field="createDetailMap.accountingQuantityDiff" value="${(-1) * itemIssuance.quantity}" />
+                <call-service service-name="createInventoryItemDetail" in-map-name="createDetailMap"/>
             </then>
             <else>
                 <if-compare field="partyAcctgPreference.cogsMethodId" operator="equals" value="COGS_FIFO" type="String">

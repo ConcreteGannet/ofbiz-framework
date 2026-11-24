@@ -285,6 +285,7 @@ under the License.
         <calculate field="createDetailMap.quantityOnHandDiff" decimal-scale="6">
             <calcop operator="negative" field="parameters.quantity"/>
         </calculate>
+        <!-- Note: accountingQuantityDiff is calculated in createAcctgTransForSalesShipmentIssuance depending on the accounting method -->
         <call-service service-name="createInventoryItemDetail" in-map-name="createDetailMap"/>
         <clear-field field="createDetailMap"/>
         <entity-and entity-name="OrderItemShipGrpInvRes" list="oisgirs">
